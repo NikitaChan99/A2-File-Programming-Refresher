@@ -116,7 +116,7 @@ public:
         while(!data_file.eof()) {
             emp.read_from_data_file(data_file);
             if(searchId == emp.id) {
-                cout<<"We found employee with id "<<emp.id<<endl;
+                cout<<"We found employee with id "<<emp.id<<" name "<<emp.name<<" with manager id "<<emp.manager_id<<" and bio is "<<emp.bio<<endl;
                 return;
             }
         }
