@@ -119,9 +119,7 @@ public:
                 cout<<"We found employee with id "<<emp.id<<endl;
                 return;
             }
-        }
-       cout<<data_file<<endl;
-        
+        }        
        cout<<"We caouldn't find the employee"<<endl;
     }
 };
