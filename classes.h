@@ -119,7 +119,10 @@ public:
                 cout<<"We found employee with id "<<emp.id<<endl;
                 return;
             }
-        }        
+        }
+        
+        data_file.clear(); // Clear the EOF flag
+        
        cout<<"We caouldn't find the employee"<<endl;
     }
 };
