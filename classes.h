@@ -29,16 +29,15 @@ public:
     void write_into_data_file(ostream& out) const {
         out.write(reinterpret_cast<const char*>(&id), sizeof(id));  // Write the integer ID
         out.write(name, sizeof(name));  // Write the fixed length name
-        /***TO_DO***/ // do the same thing for bio and manager-id
         out.write(bio, sizeof(bio));  // Write the fixed length biography
         out.write(reinterpret_cast<const char*>(&manager_id), sizeof(manager_id));  // Write the integer manager ID
+       // out.write("\n",sizeof("\n"));
     }
 
     // Read data from a binary input stream, i.e., EmployeeRelation.dat file to populate an Employee object
     void read_from_data_file(istream& in) {
         in.read(reinterpret_cast<char*>(&id), sizeof(id));  // Read the integer ID
         in.read(name, sizeof(name));  // Read the fixed length name
-        /***TO_DO***/ // do the same thing for bio and manager-id
         in.read(bio, sizeof(bio)); // Read the fixed length biography
         in.read(reinterpret_cast<char*>(&manager_id), sizeof(manager_id));  // Read the integer manager ID
     }
@@ -110,16 +109,19 @@ public:
 
     // Searches for an Employee by ID in the binary data_file and prints if found
     void findAndPrintEmployee(int searchId) {
-        
         data_file.seekg(0, ios::beg);  // Rewind the data_file to the beginning for reading
 
         Employee emp;
 
-        /*** TO_DO ***/
-        // Use [emp.read_from_data_file(data_file)] to read lines from the datafile 
-        // until you find the id you are looking for or reach the end-of-file (eof) 
-
-       
-        // Print not found message if no match
+        while(!data_file.eof()) {
+            emp.read_from_data_file(data_file);
+            if(searchId == emp.id) {
+                cout<<"We found employee with id "<<emp.id<<endl;
+                return;
+            }
+        }
+       cout<<data_file<<endl;
+        
+       cout<<"We caouldn't find the employee"<<endl;
     }
 };

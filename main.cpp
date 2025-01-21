@@ -23,8 +23,16 @@ int main(int argc, char* argv[]) {
     // we want to read from the Employee.csv and write into the new data_file
     manager.createFromFile("Employee.csv");
 
-    // Searching for Employee IDs Using [manager.findAndPrintEmployee(id)]
-    /***TO_DO***/ 
-    // manager.findAndPrintEmployee();
+
+     int id;
+     do {
+        cout<<"Please enter the employee id, enter -1 to exit ";
+        cin>>id;
+        if(id == -1) {
+            return 0;
+        }
+        manager.findAndPrintEmployee(id);
+     }while(id!=-1);
+
     return 0;
 }
