@@ -30,7 +30,8 @@ public:
         out.write(reinterpret_cast<const char*>(&id), sizeof(id));  // Write the integer ID
         out.write(name, sizeof(name));  // Write the fixed length name
         /***TO_DO***/ // do the same thing for bio and manager-id
-
+        out.write(bio, sizeof(bio));  // Write the fixed length biography
+        out.write(reinterpret_cast<const char*>(&manager_id), sizeof(manager_id));  // Write the integer manager ID
     }
 
     // Read data from a binary input stream, i.e., EmployeeRelation.dat file to populate an Employee object
@@ -38,7 +39,8 @@ public:
         in.read(reinterpret_cast<char*>(&id), sizeof(id));  // Read the integer ID
         in.read(name, sizeof(name));  // Read the fixed length name
         /***TO_DO***/ // do the same thing for bio and manager-id
-
+        in.read(bio, sizeof(bio)); // Read the fixed length biography
+        in.read(reinterpret_cast<char*>(&manager_id), sizeof(manager_id));  // Read the integer manager ID
     }
 
     // Print the Employee object to standard output
@@ -81,7 +83,24 @@ public:
             
             /***TO_DO***/ 
             // Parse id, name, bio and manager-id from line, to create the Employee object below 
+            stringstream ss(line);
+            string field;
+            // Parse ID
+            getline(ss, field, ',');
+            id = stoi(field);
 
+            // Parse Name
+            getline(ss, field, ',');
+            name = field;
+
+            // Parse Bio
+            getline(ss, field, ',');
+            bio = field;
+
+            // Parse Manager ID
+            getline(ss, field, ',');
+            manager_id = stoi(field);
+            
             Employee emp(id, name, bio, manager_id);  //create Employee objects
 
             emp.write_into_data_file(data_file); // Write the Employee object, i.e., the row you read to the .dat data_file
